@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<listofactions>
+
+	<objecttype name="navigator" >
+		<action name="show">
+			<command url="demo/test1"/>
+		</action>
+		
+		<action name="test">
+			<command url="demo/test2"/>
+		</action>
+	</objecttype>
+	
+	<objecttype name="opt" >
+		<action name="abc">
+			<command url="demo/test3"/>
+		</action>
+		
+		<action name="bbc">
+			<command url="demo/test4"/>
+		</action>
+		
+		<action name="subabc">
+			<command url="demo/test5"/>
+		</action>
+		
+		<action name="subbbc">
+			<command url="demo/test6"/>
+		</action>
+	</objecttype>
+	
+</listofactions>

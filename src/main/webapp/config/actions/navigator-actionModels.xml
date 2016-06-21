@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<actionmodels>
+
+	<model name="show_navigator_actions">
+		<action name="show" type="navigator"/>
+		<action name="test" type="navigator"/>
+		<submodel name="submenu"/>
+	</model>
+	
+	<model name="submenu">
+		<action name="abc" type="opt"/>
+		<action name="bbc" type="opt"/>
+		<submodel name="submenu2"/>
+	</model>
+	
+	<model name="submenu2">
+		<action name="subabc" type="opt"/>
+		<action name="subbbc" type="opt"/>
+	</model>
+	
+</actionmodels>
