@@ -3,6 +3,8 @@
 <title>Zero2Web</title>
 
 <meta charset="utf-8">
+
+
 <link rel="stylesheet" href="js/themes/default/easyui.css" type="text/css" media="all">
 <link rel="stylesheet" type="text/css" href="js/themes/icon.css">
 
@@ -10,6 +12,14 @@
 <script type="text/javascript" src="js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="js/easyui-lang-zh_CN.js"></script>
 
+
+<%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
+<fmt:bundle basename="com.z2w.common.resource.NavigatorRB">  
+	<fmt:message key="object.navigator.title" var="navigatorTitle"/>
+	<fmt:message key="object.menu1.title" var="menu1Title"/>
+	<fmt:message key="object.menu2.title" var="menu2Title"/>
+	<fmt:message key="object.menu3.title" var="menu3Title"/>
+</fmt:bundle>
 
 <script type="text/javascript">
 	$(function() {
@@ -69,12 +79,12 @@
 	<div data-options="region:'north',border:false" style="height: 60px">
 		<div  style="cursor:pointer" onclick="gohome()"><h1>Zero To Web</h1></div>
 	</div>
-	<div data-options="region:'west',title:'导航栏',split:true" id="aa" class="easyui-accordion" style="width: 200px">
-		<div title="菜单1" data-options="iconCls:'icon-save'">
+	<div data-options="region:'west',title:'${navigatorTitle}',split:true" id="aa" class="easyui-accordion" style="width: 200px">
+		<div title="${menu1Title}" data-options="iconCls:'icon-save'">
 		 <ul id="menu001"></ul>
 		</div>
-		<div title="菜单2" data-options="iconCls:'icon-reload'">content2</div>
-		<div title="菜单3" data-options="iconCls:'icon-print'">content3</div>
+		<div title="${menu2Title}" data-options="iconCls:'icon-reload'">content2</div>
+		<div title="${menu3Title}" data-options="iconCls:'icon-print'">content3</div>
 	</div>
 	
 	<div id="maincontent" data-options="region:'center',title:'center'">

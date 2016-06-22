@@ -7,7 +7,7 @@
 			<command url="demo/test1"/>
 		</action>
 		
-		<action name="test" resourceBundle="com.z2w.common.resource.NavigatorRB">
+		<action name="test">
 			<command url="demo/test2"/>
 		</action>
 	</objecttype>
