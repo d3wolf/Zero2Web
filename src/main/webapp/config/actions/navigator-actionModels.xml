@@ -2,19 +2,19 @@
 
 <actionmodels>
 
-	<model name="show_navigator_actions">
+	<model name="show_navigator_actions" resourceBundle="com.z2w.common.resource.NavigatorRB">
 		<action name="show" type="navigator"/>
 		<action name="test" type="navigator"/>
 		<submodel name="submenu"/>
 	</model>
 	
-	<model name="submenu">
+	<model name="submenu" resourceBundle="com.z2w.common.resource.NavigatorRB">
 		<action name="abc" type="opt"/>
 		<action name="bbc" type="opt"/>
 		<submodel name="submenu2"/>
 	</model>
 	
-	<model name="submenu2">
+	<model name="submenu2" resourceBundle="com.z2w.common.resource.NavigatorRB">
 		<action name="subabc" type="opt"/>
 		<action name="subbbc" type="opt"/>
 	</model>

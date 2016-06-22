@@ -18,6 +18,11 @@ public class Z2WActionCache {
 	public static List<Z2WActionBean> actions = null;
 	
 	/**
+	 *缓存所有action model信息
+	 */
+	public static Map<String, Z2WActionBean> actionModels = null;
+	
+	/**
 	 * 缓存所有model-action信息
 	 */
 	public static Map<String, List<Z2WActionBean>> modelActionMap = null;

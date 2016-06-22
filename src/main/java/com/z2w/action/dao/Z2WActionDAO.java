@@ -18,7 +18,16 @@ public interface Z2WActionDAO {
 	public List<Z2WActionBean> getActionBeansByFile(File actionFile) throws Z2WException;
 
 	/**
-	 * 根据actionModel文件和actions获取action model
+	 * 获取所有的action model
+	 * @param actionModelFile
+	 * @return
+	 * @throws Z2WException
+	 */
+	public Map<String, Z2WActionBean> getModelBeansByFile(File actionModelFile) throws Z2WException;
+	
+	
+	/**
+	 * 根据actionModel文件和actions获取action model与action的关系
 	 * @param actionModelFile
 	 * @param actions
 	 * @return

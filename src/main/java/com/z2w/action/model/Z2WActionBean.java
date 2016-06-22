@@ -18,6 +18,8 @@ public class Z2WActionBean {
 	
 	private String fileName;//所在的文件名
 	
+	private String resource;//resource文件
+	
 
 	/**
 	 * 新建一个action model对象
@@ -100,6 +102,14 @@ public class Z2WActionBean {
 	
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+	public String getResource() {
+		return resource;
+	}
+
+	public void setResource(String resource) {
+		this.resource = resource;
 	}
 
 }

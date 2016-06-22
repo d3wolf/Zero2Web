@@ -2,6 +2,7 @@ package com.z2w.action.service;
 
 import java.io.File;
 import java.util.List;
+import java.util.Locale;
 
 import com.z2w.action.model.Z2WActionBean;
 import com.z2w.common.exception.Z2WException;
@@ -41,4 +42,22 @@ public interface Z2WActionService {
 	 * @return
 	 */
 	public List<Z2WActionBean> getActionModels(String actionName) throws Z2WException;
+	
+	/**
+	 * 获取action model的显示名称
+	 * @param modelName
+	 * @param rbType - title|description|icon...
+	 * @param locale
+	 * @return
+	 */
+	public String getLocalizedActionModelName(String modelName, String rbType, Locale locale);
+	
+	/**
+	 * 获取action的显示名称
+	 * @param bean
+	 * @param rbType - title|description|icon...
+	 * @param locale
+	 * @return
+	 */
+	public String getLocalizedActionName(Z2WActionBean bean, String rbType, Locale locale);
 }

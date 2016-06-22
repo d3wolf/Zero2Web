@@ -2,17 +2,17 @@
 
 <listofactions>
 
-	<objecttype name="navigator" >
-		<action name="show">
+	<objecttype name="navigator" resourceBundle="com.z2w.action.resource.ActionRB">
+		<action name="show" >
 			<command url="demo/test1"/>
 		</action>
 		
-		<action name="test">
+		<action name="test" resourceBundle="com.z2w.common.resource.NavigatorRB">
 			<command url="demo/test2"/>
 		</action>
 	</objecttype>
 	
-	<objecttype name="opt" >
+	<objecttype name="opt" resourceBundle="com.z2w.action.resource.ActionRB">
 		<action name="abc">
 			<command url="demo/test3"/>
 		</action>

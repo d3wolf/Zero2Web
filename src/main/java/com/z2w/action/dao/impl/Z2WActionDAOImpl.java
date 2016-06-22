@@ -1,6 +1,10 @@
 package com.z2w.action.dao.impl;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,9 +29,12 @@ public class Z2WActionDAOImpl implements Z2WActionDAO {
 	public List<Z2WActionBean> getActionBeansByFile(File actionFile) throws Z2WException{
 		List<Z2WActionBean> beans = new ArrayList<Z2WActionBean>();
 		
+		InputStream in = null;
 		try {
+			in = new FileInputStream(actionFile);
+		
 			SAXReader reader = new SAXReader();
-			Document doc = reader.read(actionFile);
+			Document doc = reader.read(in);
 			
 			Element root = doc.getRootElement();
 
@@ -37,13 +44,21 @@ public class Z2WActionDAOImpl implements Z2WActionDAO {
 			for(Element objTypeNode : objTypeNodes){
 				String objName = objTypeNode.attributeValue("name");
 				
+				String rb = objTypeNode.attributeValue("resourceBundle");
+				
 				@SuppressWarnings("unchecked")
 				List<Element> actionNodes = objTypeNode.elements();
 				
 				for(Element actionNode : actionNodes){
 					
 					String actionName = actionNode.attributeValue("name");
+					String actionRB = actionNode.attributeValue("resourceBundle");
 					
+					//action的rb覆盖type的rb
+					if(actionRB == null){
+						actionRB = rb; 
+					}
+		
 					String url = null;
 					Element commandEle = actionNode.element("command");
 					if(commandEle != null){
@@ -51,6 +66,7 @@ public class Z2WActionDAOImpl implements Z2WActionDAO {
 					}
 					
 					Z2WActionBean bean = Z2WActionBean.newZ2WAction(actionName, objName, url);
+					bean.setResource(actionRB);
 					bean.setFileName(actionFile.getPath());
 					
 					beans.add(bean);
@@ -58,11 +74,60 @@ public class Z2WActionDAOImpl implements Z2WActionDAO {
 			}
 			
 			
-		} catch (DocumentException e) {
+		} catch (Exception e) {
 			throw new Z2WException(e);
+		}finally{
+			if(in != null){
+				try {
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		
 		return beans;
+	}
+	
+	public Map<String, Z2WActionBean> getModelBeansByFile(File actionModelFile) throws Z2WException{
+		
+		Map<String, Z2WActionBean> map = new HashMap<String, Z2WActionBean>();
+		
+		InputStream in = null;
+		try {
+			in = new FileInputStream(actionModelFile);
+		
+			SAXReader reader = new SAXReader();
+			Document doc = reader.read(in);
+			
+			Element root = doc.getRootElement();
+
+			@SuppressWarnings("unchecked")
+			List<Element> modeNodes = root.elements();
+			
+			for(Element modelNode : modeNodes){
+				String modelName = modelNode.attributeValue("name");
+				String rb = modelNode.attributeValue("resourceBundle");
+				
+				Z2WActionBean bean = Z2WActionBean.newZ2WActionModel(modelName);
+				bean.setResource(rb);
+				
+				map.put(modelName, bean);
+			}
+			
+		} catch (Exception e) {
+			throw new Z2WException(e);
+		}finally{
+			if(in != null){
+				try {
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return map;
 	}
 	
 	/* (non-Javadoc)
@@ -72,9 +137,12 @@ public class Z2WActionDAOImpl implements Z2WActionDAO {
 		
 		Map<String, List<Z2WActionBean>> modelActionMap = new HashMap<String, List<Z2WActionBean>>();
 		
+		InputStream in = null;
 		try {
+			in = new FileInputStream(actionModelFile);
+			
 			SAXReader reader = new SAXReader();
-			Document doc = reader.read(actionModelFile);
+			Document doc = reader.read(in);
 			
 			Element root = doc.getRootElement();
 
@@ -83,6 +151,8 @@ public class Z2WActionDAOImpl implements Z2WActionDAO {
 			
 			for(Element modelNode : modeNodes){
 				String modelName = modelNode.attributeValue("name");
+				String rb = modelNode.attributeValue("resourceBundle");
+				
 				List<Z2WActionBean> beans = new ArrayList<Z2WActionBean>();
 				
 				@SuppressWarnings("unchecked")
@@ -97,6 +167,10 @@ public class Z2WActionDAOImpl implements Z2WActionDAO {
 						String actionType = actionNode.attributeValue("type");
 						Z2WActionBean action = findActionByNameAndType(actions, actionName, actionType);
 						
+						if(action.getResource() == null){//如果action没有指定rb，则用model的rb
+							action.setResource(rb);
+						}
+						
 						beans.add(action);
 					}else if("submodel".equals(nodeName)){
 						String submodelName = actionNode.attributeValue("name");
@@ -105,7 +179,10 @@ public class Z2WActionDAOImpl implements Z2WActionDAO {
 							modelActionMap.put(submodelName, new ArrayList<Z2WActionBean>());
 						}
 						
-						beans.add(Z2WActionBean.newZ2WActionModel(submodelName));
+						Z2WActionBean subModel = Z2WActionBean.newZ2WActionModel(submodelName);
+						subModel.setResource(rb);
+						
+						beans.add(subModel);
 					}
 				}
 				
@@ -115,9 +192,18 @@ public class Z2WActionDAOImpl implements Z2WActionDAO {
 			}
 			
 			
-		} catch (DocumentException e) {
+		} catch (Exception e) {
 			throw new Z2WException(e);
+		}finally{
+			if(in != null){
+				try {
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
+		
 		
 		return modelActionMap;
 	}

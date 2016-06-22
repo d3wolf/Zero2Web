@@ -2,6 +2,7 @@ package com.z2w.action.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,10 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.support.RequestContext;
 
 import com.z2w.action.model.Z2WActionBean;
 import com.z2w.action.service.Z2WActionService;
 import com.z2w.common.exception.Z2WException;
+import com.z2w.init.Z2WSytemInit;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -63,11 +66,15 @@ public class ActionController {
 	private Z2WActionService z2WActionService;
 
 	@RequestMapping(value = "modelActions")
-	public void getActionByModelName(HttpServletResponse response, @RequestParam("id") String name)
+	public void getActionByModelName(HttpServletRequest request, HttpServletResponse response, @RequestParam("id") String name)
 			throws Z2WException, IOException {
 		List<Z2WActionBean> actions = z2WActionService.getModelActions(name);
 
-		JSONArray array = constructActionJson(actions);
+		
+		RequestContext requestContext = new RequestContext(request);//获取请求的Locale
+		Locale locale = requestContext .getLocale();
+		
+		JSONArray array = constructActionJson(actions, locale);
 
 		response.setContentType("text/html;charset=UTF-8");// 处理乱码
 
@@ -80,14 +87,14 @@ public class ActionController {
 	 * @return
 	 * @throws Z2WException
 	 */
-	public JSONArray constructActionJson(List<Z2WActionBean> actions) throws Z2WException{
+	public JSONArray constructActionJson(List<Z2WActionBean> actions, Locale locale) throws Z2WException{
 		JSONArray array = new JSONArray();
 
 		for (Z2WActionBean action : actions) {
 			if (!action.isModel()) {
 				JSONObject jo = new JSONObject();
 				jo.put("id", action.getName());
-				jo.put("text", action.getName());
+				jo.put("text", z2WActionService.getLocalizedActionName(action,"title", locale));
 				jo.put("url", action.getUrl());
 				jo.put("type", action.getType());
 
@@ -95,17 +102,26 @@ public class ActionController {
 			}else{
 				JSONObject jo = new JSONObject();
 				jo.put("id", action.getName());
-				jo.put("text", action.getName());
+				jo.put("text", z2WActionService.getLocalizedActionModelName(action.getName(),"title", locale));
 				jo.put("state", "closed");//model默认折叠起来
 
 				List<Z2WActionBean> subActions = z2WActionService.getModelActions(action.getName());
 				
-				jo.put("children", constructActionJson(subActions));
+				jo.put("children", constructActionJson(subActions, locale));
 				
 				array.add(jo);
 			}
 		}
 		
 		return array;
+	}
+	
+	@Autowired
+	private Z2WSytemInit zi;
+	
+	@RequestMapping(value = "/reload")
+	public void reloadActions(HttpServletRequest request, HttpServletResponse response){
+		RequestContext requestContext = new RequestContext(request);
+		
 	}
 }
