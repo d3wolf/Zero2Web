@@ -43,7 +43,7 @@ public class Z2WActionServiceImpl implements Z2WActionService {
 			}
 		}
 
-		Z2WActionCache.actionModels = map;// 加载到缓存
+		Z2WActionCache.actionModels = map;//瀛樺叆缂撳瓨
 	}
 
 	private List<Z2WActionBean> loadAllActions(File actionsFolder) throws Z2WException {
@@ -73,7 +73,7 @@ public class Z2WActionServiceImpl implements Z2WActionService {
 			}
 		}
 
-		// 写到cache中去
+		//瀛樺叆缂撳瓨
 		Z2WActionCache.actions = actions;
 		Z2WActionCache.modelActionMap = modelActionMap;
 
@@ -82,7 +82,7 @@ public class Z2WActionServiceImpl implements Z2WActionService {
 
 	public List<Z2WActionBean> getModelActions(String actionModelName) throws Z2WException {
 		if (Z2WActionCache.modelActionMap == null) {
-			throw new Z2WException("model-action没有成功加载到缓存");
+			throw new Z2WException("model-action does not exist in cache");
 		}
 
 		return Z2WActionCache.modelActionMap.get(actionModelName);
@@ -90,7 +90,7 @@ public class Z2WActionServiceImpl implements Z2WActionService {
 
 	public Z2WActionBean getActionByNameAndType(String actionName, String type) throws Z2WException {
 		if (Z2WActionCache.actions == null) {
-			throw new Z2WException("action没有成功加载到缓存");
+			throw new Z2WException("action does not exist in cache");
 		}
 
 		return actionDao.findActionByNameAndType(Z2WActionCache.actions, actionName, type);
@@ -103,7 +103,7 @@ public class Z2WActionServiceImpl implements Z2WActionService {
 
 	public Z2WActionBean getActionModelByName(String actionModelName) throws Z2WException {
 		if (Z2WActionCache.actionModels == null) {
-			throw new Z2WException("action没有成功加载到缓存");
+			throw new Z2WException("action does not exist in cache");
 		}
 		return Z2WActionCache.actionModels.get(actionModelName);
 	}

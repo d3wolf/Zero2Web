@@ -13,18 +13,18 @@ import com.z2w.action.service.Z2WActionService;
 import com.z2w.common.exception.Z2WException;
 
 /**
- * ³õÊ¼»¯µÄbean£¬ÊµÏÖServletContextAware£¬ÔÚÏîÄ¿Æô¶¯Ê±Ö´ĞĞsetServletContext·½·¨
+ * ç³»ç»Ÿå¯åŠ¨æ—¶æ‰§è¡Œçš„ç±»
  */
 @Component
 public class Z2WSytemInit implements ServletContextAware {
 
-	public static final String ACTION_CONFIG_FOLDER = "/config/actions/";//actionÎÄ¼şÎ»ÖÃ
+	public static final String ACTION_CONFIG_FOLDER = "/config/actions/";//actionï¿½Ä¼ï¿½Î»ï¿½ï¿½
 	
 	@Autowired
 	private Z2WActionService z2WActionService;
 
 	/**
-	 * ÏîÄ¿Æô¶¯Ê±×Ô¶¯Ö´ĞĞ
+	 * ç³»ç»Ÿå¯åŠ¨æ—¶æ‰§è¡Œçš„æ–¹æ³•
 	 */
 	public void setServletContext(ServletContext sc) {
 
@@ -41,7 +41,7 @@ public class Z2WSytemInit implements ServletContextAware {
 	public void reloadAction(ServletContext sc){
 		String path = sc.getRealPath(ACTION_CONFIG_FOLDER);
 		
-		System.out.println("action ÎÄ¼ş¼ĞÎ»ÖÃ:" + path);
+		System.out.println("action folder:" + path);
 		
 		File actionFolder = new File(path);
 		

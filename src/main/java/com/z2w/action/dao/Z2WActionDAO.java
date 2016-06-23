@@ -10,7 +10,7 @@ import com.z2w.common.exception.Z2WException;
 public interface Z2WActionDAO {
 
 	/**
-	 * 根据文件读取action信息
+	 * 璇诲彇action
 	 * @param actionFile
 	 * @return
 	 * @throws Z2WException 
@@ -18,7 +18,7 @@ public interface Z2WActionDAO {
 	public List<Z2WActionBean> getActionBeansByFile(File actionFile) throws Z2WException;
 
 	/**
-	 * 获取所有的action model
+	 * 璇诲彇action model
 	 * @param actionModelFile
 	 * @return
 	 * @throws Z2WException
@@ -27,7 +27,7 @@ public interface Z2WActionDAO {
 	
 	
 	/**
-	 * 根据actionModel文件和actions获取action model与action的关系
+	 *灏哸ction鍜宮odel鏁村悎
 	 * @param actionModelFile
 	 * @param actions
 	 * @return
@@ -37,7 +37,7 @@ public interface Z2WActionDAO {
 			throws Z2WException;
 
 	/**
-	 * 根据名称和type获取action(model)
+	 *鏍规嵁鍚嶇О鍜岀被鍨嬫煡鎵綼ction(model)
 	 * @param actions
 	 * @param name
 	 * @param type

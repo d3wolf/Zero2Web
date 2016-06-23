@@ -1,7 +1,7 @@
 package com.z2w.action.model;
 
 /**
- * ÓÃÀ´´æ´¢action ºÍaction modelµÄbean
+ * å­˜å‚¨actionä¿¡æ¯çš„bean
  * 
  * @author Wolf
  *
@@ -10,19 +10,19 @@ public class Z2WActionBean {
 
 	private String name;
 
-	private Boolean model;// ÊÇ·ñÊÇmodel
+	private Boolean model;// æ˜¯å¦æ˜¯model
 
-	private String type;// action²ÅÓÐ
+	private String type;// action type
 
-	private String url;// µã»÷action¶ÔÓ¦µÄurl,Èç¹ûÊÇmodelÔòÎª¿Õ
+	private String url;// actionçš„url
 	
-	private String fileName;//ËùÔÚµÄÎÄ¼þÃû
+	private String fileName;//æ‰€åœ¨çš„æ–‡ä»¶åç§°
 	
-	private String resource;//resourceÎÄ¼þ
+	private String resource;//resource
 	
 
 	/**
-	 * ÐÂ½¨Ò»¸öaction model¶ÔÏó
+	 * æž„é€ action model
 	 * @param name
 	 * @return
 	 */
@@ -36,7 +36,7 @@ public class Z2WActionBean {
 	}
 	
 	/**
-	 * ÐÂ½¨Ò»¸öaction¶ÔÏó
+	 *æž„é€ action
 	 * @param name
 	 * @param type
 	 * @param url

@@ -10,41 +10,41 @@ import com.z2w.common.exception.Z2WException;
 public interface Z2WActionService {
 
 	/**
-	 * 初始化action
+	 * 鍒濆鍖朼ction
 	 * @param actionsFolder
 	 * @throws Z2WException
 	 */
 	public void init(File actionsFolder) throws Z2WException;
 	/**
-	 * 根据名称获取action model
+	 * 鏍规嵁鍚嶇О鑾峰彇action model
 	 * @param actionModelName
 	 * @return
 	 */
 	public Z2WActionBean getActionModelByName(String actionModelName) throws Z2WException;
 	
 	/**
-	 * 根据名称获取action
+	 * 鏍规嵁鍚嶇О鍜岀被鍨嬭幏鍙朼ction
 	 * @param actionName
 	 * @return
 	 */
 	public Z2WActionBean getActionByNameAndType(String actionName, String type) throws Z2WException;
 	
 	/**
-	 * 根据action model名称获取所有子action(model)
+	 * 鑾峰彇model涓嬫墍鏈塧ction
 	 * @param actionModelName
 	 * @return
 	 */
 	public List<Z2WActionBean> getModelActions(String actionModelName) throws Z2WException;
 	
 	/**
-	 * 根据action名称获取到它所有的父model
+	 * 鑾峰彇action鐨刴odel
 	 * @param actionName
 	 * @return
 	 */
 	public List<Z2WActionBean> getActionModels(String actionName) throws Z2WException;
 	
 	/**
-	 * 获取action model的显示名称
+	 * 鑾峰彇鏈湴鍖栫殑model鍚嶇О
 	 * @param modelName
 	 * @param rbType - title|description|icon...
 	 * @param locale
@@ -53,7 +53,7 @@ public interface Z2WActionService {
 	public String getLocalizedActionModelName(String modelName, String rbType, Locale locale);
 	
 	/**
-	 * 获取action的显示名称
+	 * 鑾峰彇鏈湴鍖栫殑action鍚嶇О
 	 * @param bean
 	 * @param rbType - title|description|icon...
 	 * @param locale

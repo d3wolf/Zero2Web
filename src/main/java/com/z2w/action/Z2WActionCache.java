@@ -6,24 +6,24 @@ import java.util.Map;
 import com.z2w.action.model.Z2WActionBean;
 
 /**
- * ÓÃÀ´»º´æactionÏà¹ØÐÅÏ¢£¬³õÊ¼»¯Ê¹ÓÃ£¬ºóÐø¿ÉÒÔÔÚservice¸üÐÂ
+ * actionç›¸å…³çš„ç¼“å­˜ï¼Œåœ¨serviceä¸­æ›´æ–°è¿™äº›å…¨å±€å˜é‡
  * @author Wolf
  *
  */
 public class Z2WActionCache {
 
 	/**
-	 *»º´æËùÓÐactionÐÅÏ¢
+	 * æ‰€æœ‰çš„action
 	 */
 	public static List<Z2WActionBean> actions = null;
 	
 	/**
-	 *»º´æËùÓÐaction modelÐÅÏ¢
+	 * æ‰€æœ‰çš„model
 	 */
 	public static Map<String, Z2WActionBean> actionModels = null;
 	
 	/**
-	 * »º´æËùÓÐmodel-actionÐÅÏ¢
+	 * æ‰€æœ‰çš„model-action
 	 */
 	public static Map<String, List<Z2WActionBean>> modelActionMap = null;
 }

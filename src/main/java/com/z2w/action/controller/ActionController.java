@@ -51,14 +51,14 @@ public class ActionController {
 			array.add(jo);
 		}
 
-		response.setContentType("text/html;charset=UTF-8");// ´¦ÀíÂÒÂë
+		response.setContentType("text/html;charset=UTF-8");// é˜²æ­¢ä¹±ç 
 
 		response.getWriter().write(array.toString());
 	}
 	
 	@RequestMapping(value = "demo/*")
 	public void getDemoAction(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		response.setContentType("text/html;charset=UTF-8");// ´¦ÀíÂÒÂë
+		response.setContentType("text/html;charset=UTF-8");// é˜²æ­¢ä¹±ç 
 
 		response.getWriter().write(request.getRequestURL().toString());
 	}
@@ -72,18 +72,18 @@ public class ActionController {
 		List<Z2WActionBean> actions = z2WActionService.getModelActions(name);
 
 		
-		RequestContext requestContext = new RequestContext(request);//»ñÈ¡ÇëÇóµÄLocale
+		RequestContext requestContext = new RequestContext(request);
 		Locale locale = requestContext .getLocale();
 		
 		JSONArray array = constructActionJson(actions, locale);
 
-		response.setContentType("text/html;charset=UTF-8");// ´¦ÀíÂÒÂë
+		response.setContentType("text/html;charset=UTF-8");
 
 		response.getWriter().write(array.toString());
 	}
 	
 	/**
-	 * ¹¹Ôìaction json×Ö·û´®£¬ÒòÎªÒªÓÃµİ¹é´¦Àísub model£¬ËùÒÔµ¥¶ÀĞ´Ò»¸ö·½·¨
+	 * é‡‡ç”¨é€’å½’æ„é€ action treeçš„jsonå­—ç¬¦ä¸²
 	 * @param actions
 	 * @return
 	 * @throws Z2WException
@@ -104,7 +104,7 @@ public class ActionController {
 				JSONObject jo = new JSONObject();
 				jo.put("id", action.getName());
 				jo.put("text", z2WActionService.getLocalizedActionModelName(action.getName(),"title", locale));
-				jo.put("state", "closed");//modelÄ¬ÈÏÕÛµşÆğÀ´
+				jo.put("state", "closed");//modelé»˜è®¤æŠ˜å 
 
 				List<Z2WActionBean> subActions = z2WActionService.getModelActions(action.getName());
 				
@@ -124,7 +124,7 @@ public class ActionController {
 	public void reloadActions(HttpServletRequest request, HttpServletResponse response){
 		
 		ServletContext context = request.getSession().getServletContext();
-		try {//Ïß³Ìsleep 2Ãë£¬ÑÓ³¤´úÂëÖ´ĞĞÊ±¼ä
+		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
