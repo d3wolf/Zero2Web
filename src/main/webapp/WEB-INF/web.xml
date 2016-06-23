@@ -9,6 +9,12 @@
 	</welcome-file-list>
   
 	<context-param>
+		<description>setup when init in com.z2w.init.Z2WSytemInit</description>
+		<param-name>webAppRootKey</param-name>
+		<param-value>webapp.root</param-value>
+	</context-param>
+  
+	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/applicationContext.xml</param-value>
 	</context-param>

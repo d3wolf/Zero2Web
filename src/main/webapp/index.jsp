@@ -14,11 +14,11 @@
 
 
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
-<fmt:bundle basename="com.z2w.common.resource.NavigatorRB">  
-	<fmt:message key="object.navigator.title" var="navigatorTitle"/>
-	<fmt:message key="object.menu1.title" var="menu1Title"/>
-	<fmt:message key="object.menu2.title" var="menu2Title"/>
-	<fmt:message key="object.menu3.title" var="menu3Title"/>
+<fmt:bundle basename="com.z2w.common.resource.NavigatorRB">
+	<fmt:message key="object.navigator.title" var="navigatorTitle" />
+	<fmt:message key="object.menu1.title" var="menu1Title" />
+	<fmt:message key="object.system_config_actions.title" var="menu2Title" />
+	<fmt:message key="object.menu3.title" var="menu3Title" />
 </fmt:bundle>
 
 <script type="text/javascript">
@@ -26,14 +26,26 @@
 		var location = (window.location+'').split('/');  
 		var basePath = location[0]+'//'+location[2]+'/'+location[3]; 
 		
-        $('#menu001').tree({   
+        $('#menu001').tree({
             checkbox: false,   
             url: '${pageContext.request.contextPath}/z2w/action/modelActions?id=show_navigator_actions' ,
 
 			onClick : function(node) {
 				if(node.url){
-				window.location.href=basePath  + '/#z2w/action/' + node.url;
-			//	$('#maincontent').panel('setTitle',"菜单1>>"+node.text);
+					window.location.href=basePath  + '/#z2w/' + node.url;
+				//	$('#maincontent').panel('setTitle',"${menu1Title}>>"+node.text);
+				}
+			}
+		});
+        
+        $('#menu002').tree({
+            checkbox: false,   
+            url: '${pageContext.request.contextPath}/z2w/action/modelActions?id=system_config_actions' ,
+
+			onClick : function(node) {
+				if(node.url){
+					window.location.href=basePath  + '/#z2w/' + node.url;
+				//	$('#maincontent').panel('setTitle',"${menu2Title}>>"+node.text);
 				}
 			}
 		});
@@ -77,18 +89,22 @@
 </head>
 <body class="easyui-layout">
 	<div data-options="region:'north',border:false" style="height: 60px">
-		<div  style="cursor:pointer" onclick="gohome()"><h1>Zero To Web</h1></div>
+		<div style="cursor: pointer" onclick="gohome()">
+			<h1>Zero To Web</h1>
+		</div>
 	</div>
 	<div data-options="region:'west',title:'${navigatorTitle}',split:true" id="aa" class="easyui-accordion" style="width: 200px">
 		<div title="${menu1Title}" data-options="iconCls:'icon-save'">
-		 <ul id="menu001"></ul>
+			<ul id="menu001"></ul>
 		</div>
-		<div title="${menu2Title}" data-options="iconCls:'icon-reload'">content2</div>
+		<div title="${menu2Title}" data-options="iconCls:'icon-reload'">
+			<ul id="menu002"></ul>
+		</div>
 		<div title="${menu3Title}" data-options="iconCls:'icon-print'">content3</div>
 	</div>
-	
+
 	<div id="maincontent" data-options="region:'center',title:'center'">
-		<iframe id="maincontentframe" style="width:100%;height:100%;border:0px solid #ccc;"></iframe>
+		<iframe id="maincontentframe" style="width: 100%; height: 100%; border: 0px solid #ccc;"></iframe>
 	</div>
-	
+
 </body>

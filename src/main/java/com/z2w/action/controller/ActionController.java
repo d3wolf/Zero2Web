@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -121,7 +122,13 @@ public class ActionController {
 	
 	@RequestMapping(value = "/reload")
 	public void reloadActions(HttpServletRequest request, HttpServletResponse response){
-		RequestContext requestContext = new RequestContext(request);
 		
+		ServletContext context = request.getSession().getServletContext();
+		try {//线程sleep 2秒，延长代码执行时间
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		zi.reloadAction(context);
 	}
 }

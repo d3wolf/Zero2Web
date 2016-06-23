@@ -4,30 +4,36 @@
 
 	<objecttype name="navigator" resourceBundle="com.z2w.action.resource.ActionRB">
 		<action name="show" >
-			<command url="demo/test1"/>
+			<command url="action/demo/test1"/>
 		</action>
 		
 		<action name="test">
-			<command url="demo/test2"/>
+			<command url="action/demo/test2"/>
 		</action>
 	</objecttype>
 	
 	<objecttype name="opt" resourceBundle="com.z2w.action.resource.ActionRB">
 		<action name="abc">
-			<command url="demo/test3"/>
+			<command url="action/demo/test3"/>
 		</action>
 		
 		<action name="bbc">
-			<command url="demo/test4"/>
+			<command url="action/demo/test4"/>
 		</action>
 		
 		<action name="subabc">
-			<command url="demo/test5"/>
+			<command url="action/demo/test5"/>
 		</action>
 		
 		<action name="subbbc">
-			<command url="demo/test6"/>
+			<command url="action/demo/test6"/>
 		</action>
 	</objecttype>
+	
+	<objecttype name="system">
+		<action name="systemTools">
+			<command url="system/tools"/>
+		</action>
+	</objecttype> 
 	
 </listofactions>

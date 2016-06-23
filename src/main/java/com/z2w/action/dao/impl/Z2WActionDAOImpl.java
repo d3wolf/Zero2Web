@@ -167,6 +167,10 @@ public class Z2WActionDAOImpl implements Z2WActionDAO {
 						String actionType = actionNode.attributeValue("type");
 						Z2WActionBean action = findActionByNameAndType(actions, actionName, actionType);
 						
+						if(action == null){
+							continue;
+						}
+						
 						if(action.getResource() == null){//如果action没有指定rb，则用model的rb
 							action.setResource(rb);
 						}
