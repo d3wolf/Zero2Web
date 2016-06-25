@@ -34,6 +34,10 @@
 		<action name="systemTools">
 			<command url="system/tools"/>
 		</action>
+		
+		<action name="log4jMng">
+			<command url="log4j/manage"/>
+		</action>
 	</objecttype> 
 	
 </listofactions>

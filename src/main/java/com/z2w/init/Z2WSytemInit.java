@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.servlet.ServletContext;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.ServletContextAware;
@@ -18,7 +19,9 @@ import com.z2w.common.exception.Z2WException;
 @Component
 public class Z2WSytemInit implements ServletContextAware {
 
-	public static final String ACTION_CONFIG_FOLDER = "/config/actions/";//action�ļ�λ��
+	private static final Logger logger = Logger.getLogger(Z2WSytemInit.class.getName());
+	
+	public static final String ACTION_CONFIG_FOLDER = "/config/actions/";//action文件位置
 	
 	@Autowired
 	private Z2WActionService z2WActionService;
@@ -29,6 +32,9 @@ public class Z2WSytemInit implements ServletContextAware {
 	public void setServletContext(ServletContext sc) {
 
 		String root = sc.getRealPath("/");
+		
+		logger.info("system root path: " + root);
+		
 		System.setProperty("webapp.root", root);
 		
 		reloadAction(sc);
@@ -41,7 +47,7 @@ public class Z2WSytemInit implements ServletContextAware {
 	public void reloadAction(ServletContext sc){
 		String path = sc.getRealPath(ACTION_CONFIG_FOLDER);
 		
-		System.out.println("action folder:" + path);
+		logger.info("action folder:" + path);
 		
 		File actionFolder = new File(path);
 		
@@ -51,7 +57,7 @@ public class Z2WSytemInit implements ServletContextAware {
 			e.printStackTrace();
 		}
 		
-		System.out.println(Z2WActionCache.modelActionMap);
+		logger.info(Z2WActionCache.modelActionMap);
 	}
 
 }

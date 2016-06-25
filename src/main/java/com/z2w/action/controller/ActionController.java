@@ -121,7 +121,7 @@ public class ActionController {
 	private Z2WSytemInit zi;
 	
 	@RequestMapping(value = "/reload")
-	public void reloadActions(HttpServletRequest request, HttpServletResponse response){
+	public void reloadActions(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		
 		ServletContext context = request.getSession().getServletContext();
 		try {
@@ -130,5 +130,9 @@ public class ActionController {
 			e.printStackTrace();
 		}
 		zi.reloadAction(context);
+		
+		response.setContentType("text/html;charset=UTF-8");
+
+		response.getWriter().write("{'success':true}");
 	}
 }

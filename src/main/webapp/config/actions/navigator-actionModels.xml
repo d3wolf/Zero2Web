@@ -23,6 +23,7 @@
 	
 	<model name="system_config_actions" resourceBundle="com.z2w.common.resource.NavigatorRB">
 		<action name="systemTools" type="system"/>
+		<action name="log4jMng" type="system"/>
 	</model>
 	
 </actionmodels>

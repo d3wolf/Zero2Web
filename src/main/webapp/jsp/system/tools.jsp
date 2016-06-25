@@ -9,8 +9,8 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/themes/icon.css">
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}js/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/easyui-lang-zh_CN.js"></script>
 
 
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -23,8 +23,10 @@
 <script type="text/javascript">
 	function reloadAction() {
 		$.ajax({
+			cache: false,//必须不要缓存，否则只执行一次
 			url : "${pageContext.request.contextPath}/z2w/action/reload",
-			success : function() {
+			success : function(result) {
+			//	$.messager.alert('Hello',result);  
 				alert("action reload completely");
 			}
 		});
