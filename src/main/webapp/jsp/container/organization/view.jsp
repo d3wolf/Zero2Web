@@ -6,13 +6,17 @@
 
 <script type="text/javascript">
 	$(function() {
-		$('#viewOrganizations').datagrid({    
+		$('#viewOrganizations').datagrid({
 		    url:'${pageContext.request.contextPath}/z2w/organization/getAll',    
-		    columns:[[    
-		        {field:'name',title:'名称',width:100},    
+		    columns:[[
+		        {field:'id',checkbox:true,},
+		        {field:'name',title:'名称',width:100,sortable : true},    
 		        {field:'createTimestamp',title:'创建时间',width:120,formatter:formatFun},    
 		        {field:'modefyTimestamp',title:'修改时间',width:120,formatter:formatFun}    
-		    ]]    
+		    ]],
+		    toolbar: [
+		                { text: '增加', iconCls: 'icon-add', handler: function () { deviceInfoAddClick(); } },
+		                { text: '修改', iconCls: 'icon-edit', handler: function () { deviceInfoEditClick(); } }],
 		}); 
 	});
 	
