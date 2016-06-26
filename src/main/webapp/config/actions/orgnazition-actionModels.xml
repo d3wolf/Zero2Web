@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<actionmodels>
+
+	<model name="orgnazition_navigator_actions" resourceBundle="com.z2w.container.resource.Z2WOrganizationRB">
+		<action name="detail" type="orgnazition"/>
+		<action name="content" type="orgnazition"/>
+	</model>
+	
+	
+</actionmodels>

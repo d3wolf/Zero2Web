@@ -7,6 +7,8 @@ import java.util.Locale;
 import com.z2w.action.model.Z2WActionBean;
 import com.z2w.common.exception.Z2WException;
 
+import net.sf.json.JSONArray;
+
 public interface Z2WActionService {
 
 	/**
@@ -60,4 +62,12 @@ public interface Z2WActionService {
 	 * @return
 	 */
 	public String getLocalizedActionName(Z2WActionBean bean, String rbType, Locale locale);
+	
+	/**
+	 * 采用递归构造action tree的json字符串
+	 * @param actions
+	 * @return
+	 * @throws Z2WException
+	 */
+	public JSONArray constructActionJson(List<Z2WActionBean> actions, Locale locale) throws Z2WException;
 }

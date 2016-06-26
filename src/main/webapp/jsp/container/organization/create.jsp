@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <head>
-<title>Create Orgnazition</title>
+<title>Create Organization</title>
 
 <%@include file="/jsp/common.jsp" %> 
 

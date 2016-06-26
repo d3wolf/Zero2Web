@@ -9,7 +9,7 @@ import com.z2w.common.model.Z2WObject;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Z2WOrgnazition extends Z2WObject implements Z2WContainer {
+public class Z2WOrganization extends Z2WObject implements Z2WContainer {
 
 	@Column(nullable = false, updatable = true)
 	private String name;

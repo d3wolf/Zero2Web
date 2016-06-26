@@ -75,46 +75,11 @@ public class ActionController {
 		RequestContext requestContext = new RequestContext(request);
 		Locale locale = requestContext .getLocale();
 		
-		JSONArray array = constructActionJson(actions, locale);
+		JSONArray array = z2WActionService.constructActionJson(actions, locale);
 
 		response.setContentType("text/html;charset=UTF-8");
 
 		response.getWriter().write(array.toString());
-	}
-	
-	/**
-	 * 采用递归构造action tree的json字符串
-	 * @param actions
-	 * @return
-	 * @throws Z2WException
-	 */
-	public JSONArray constructActionJson(List<Z2WActionBean> actions, Locale locale) throws Z2WException{
-		JSONArray array = new JSONArray();
-
-		for (Z2WActionBean action : actions) {
-			if (!action.isModel()) {
-				JSONObject jo = new JSONObject();
-				jo.put("id", action.getName());
-				jo.put("text", z2WActionService.getLocalizedActionName(action,"title", locale));
-				jo.put("url", action.getUrl());
-				jo.put("type", action.getType());
-
-				array.add(jo);
-			}else{
-				JSONObject jo = new JSONObject();
-				jo.put("id", action.getName());
-				jo.put("text", z2WActionService.getLocalizedActionModelName(action.getName(),"title", locale));
-				jo.put("state", "closed");//model默认折叠
-
-				List<Z2WActionBean> subActions = z2WActionService.getModelActions(action.getName());
-				
-				jo.put("children", constructActionJson(subActions, locale));
-				
-				array.add(jo);
-			}
-		}
-		
-		return array;
 	}
 	
 	@Autowired

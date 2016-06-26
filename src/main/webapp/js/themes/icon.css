@@ -94,3 +94,15 @@
 .icon-large-chart{
 	background:url('icons/large_chart.png') no-repeat center center;
 }
+
+.icon-organization{
+	background:url('icons/organization.gif') no-repeat center center;
+}
+
+.icon-view-list{
+	background:url('icons/view_list.png') no-repeat center center;
+}
+
+.icon-node{
+	background:url('icons/node.png') no-repeat center center;
+}

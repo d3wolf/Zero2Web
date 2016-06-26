@@ -20,6 +20,9 @@ import com.z2w.action.service.Z2WActionService;
 import com.z2w.common.exception.Z2WException;
 import com.z2w.rb.service.Z2WResourceBundleService;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 @Service
 public class Z2WActionServiceImpl implements Z2WActionService {
 
@@ -148,4 +151,42 @@ public class Z2WActionServiceImpl implements Z2WActionService {
 
 		return message;
 	}
+	
+	/**
+	 * 采用递归构造action tree的json字符串
+	 * @param actions
+	 * @return
+	 * @throws Z2WException
+	 */
+	public JSONArray constructActionJson(List<Z2WActionBean> actions, Locale locale) throws Z2WException{
+		JSONArray array = new JSONArray();
+
+		for (Z2WActionBean action : actions) {
+			if (!action.isModel()) {
+				JSONObject jo = new JSONObject();
+				jo.put("id", action.getName());
+				jo.put("text", getLocalizedActionName(action,"title", locale));
+				jo.put("url", action.getUrl());
+				jo.put("type", action.getType());
+				jo.put("iconCls", "icon-node");
+
+				array.add(jo);
+			}else{
+				JSONObject jo = new JSONObject();
+				jo.put("id", action.getName());
+				jo.put("text", getLocalizedActionModelName(action.getName(),"title", locale));
+				jo.put("state", "closed");//model默认折叠
+				jo.put("iconCls", "icon-node");
+
+				List<Z2WActionBean> subActions = getModelActions(action.getName());
+				
+				jo.put("children", constructActionJson(subActions, locale));
+				
+				array.add(jo);
+			}
+		}
+		
+		return array;
+	}
+	
 }

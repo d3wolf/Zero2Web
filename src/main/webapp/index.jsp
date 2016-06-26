@@ -18,13 +18,36 @@
 	<fmt:message key="object.navigator.title" var="navigatorTitle" />
 	<fmt:message key="object.menu1.title" var="menu1Title" />
 	<fmt:message key="object.system_config_actions.title" var="menu2Title" />
-	<fmt:message key="object.menu3.title" var="menu3Title" />
+	<fmt:message key="object.orgnazition.title" var="menu3Title" />
 </fmt:bundle>
 
 <script type="text/javascript">
 	$(function() {
 		var location = (window.location+'').split('/');  
 		var basePath = location[0]+'//'+location[2]+'/'+location[3]; 
+		
+		$('#organization').panel({
+			  tools: [{
+			    iconCls:'icon-view-list',
+			    handler:function(){
+			    	$('#navigation-panel').accordion('select','${menu3Title}');
+			    	window.location.href=basePath  + '/#z2w/organization/view';
+			   // 	$('#maincontent').panel('setTitle',"${menu3Title}");
+				}    
+			  }]    
+		});  
+		
+	   $('#list_orgnazition').tree({
+            checkbox: false,   
+            url: '${pageContext.request.contextPath}/z2w/organization/listOrgNavOpt' ,
+
+			onClick : function(node) {
+				if(node.url){
+					window.location.href=basePath  + '/#z2w/' + node.url;
+				//	$('#maincontent').panel('setTitle',"${menu1Title}>>"+node.text);
+				}
+			}
+		});
 		
         $('#menu001').tree({
             checkbox: false,   
@@ -38,7 +61,7 @@
 			}
 		});
         
-        $('#menu002').tree({
+        $('#system_config').tree({
             checkbox: false,   
             url: '${pageContext.request.contextPath}/z2w/action/modelActions?id=system_config_actions' ,
 
@@ -93,14 +116,17 @@
 			<h1>Zero To Web</h1>
 		</div>
 	</div>
-	<div data-options="region:'west',title:'${navigatorTitle}',split:true" id="aa" class="easyui-accordion" style="width: 200px">
+	<div data-options="region:'west',title:'${navigatorTitle}',split:true" id="navigation-panel" class="easyui-accordion" style="width: 200px">
+		<div id="organization" title="${menu3Title}" data-options="iconCls:'icon-organization'">
+			<ul id="list_orgnazition"></ul>
+		</div>
+
+		<div title="${menu2Title}" data-options="iconCls:'icon-reload'">
+			<ul id="system_config"></ul>
+		</div>
 		<div title="${menu1Title}" data-options="iconCls:'icon-save'">
 			<ul id="menu001"></ul>
 		</div>
-		<div title="${menu2Title}" data-options="iconCls:'icon-reload'">
-			<ul id="menu002"></ul>
-		</div>
-		<div title="${menu3Title}" data-options="iconCls:'icon-print'">content3</div>
 	</div>
 
 	<div id="maincontent" data-options="region:'center',title:'center'">

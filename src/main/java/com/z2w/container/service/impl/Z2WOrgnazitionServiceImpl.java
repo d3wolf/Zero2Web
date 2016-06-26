@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.z2w.container.dao.Z2WOrgnazitionRepository;
-import com.z2w.container.model.Z2WOrgnazition;
+import com.z2w.container.model.Z2WOrganization;
 import com.z2w.container.service.Z2WOrgnazitionService;
 
 @Service
@@ -18,17 +18,23 @@ public class Z2WOrgnazitionServiceImpl implements Z2WOrgnazitionService{
 	@Autowired
 	Z2WOrgnazitionRepository dao;
 	
-	public Z2WOrgnazition getOrgnazitionByName(String name){
-		List<Z2WOrgnazition> orgs = dao.findZ2WOrgnazitionByName(name);
+	public Z2WOrganization getOrganizationByName(String name){
+		List<Z2WOrganization> orgs = dao.findZ2WOrgnazitionByName(name);
 		if(orgs.size() > 0){
-			Z2WOrgnazition exOrg = orgs.get(0);
+			Z2WOrganization exOrg = orgs.get(0);
 			
 			return exOrg;
 		}
 		return null;
 	}
 	
-	public Z2WOrgnazition createOrUpdateOrgnazition(Z2WOrgnazition org){
+	public Z2WOrganization createOrUpdateOrganization(Z2WOrganization org){
 		return dao.save(org);
+	}
+	
+	public List<Z2WOrganization> getAllOrganization(){
+		List<Z2WOrganization> orgs = (List<Z2WOrganization>) dao.findAll();
+		
+		return orgs;
 	}
 }
