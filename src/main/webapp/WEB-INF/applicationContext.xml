@@ -16,4 +16,75 @@
     <!--包进行扫描，实现注释驱动Bean定义-->
 	<context:annotation-config />  
 	
+	<!--  ***************************数据源配置*************************** -->						
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/z2w?characterEncoding=UTF-8"/>
+		<property name="username" value="root"/>
+		<property name="password" value="x5"/>
+	</bean>
+	
+<!-- Hibernate session factory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource"/>
+		</property>
+	</bean>
+	
+	<!-- JPA实体管理器工厂 -->
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">  
+		<property name="dataSource" ref="dataSource"/>
+		<property name="persistenceProvider" ref="persistenceProvider"/>
+		<property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>  
+		<property name="jpaDialect" ref="jpaDialect"/>  
+           
+		<property name="packagesToScan">
+			<list>
+				<value>com.z2w.*.model</value><!--比类所在路径少一层-->
+			</list>
+		</property>
+           
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+				<prop key="hibernate.max_fetch_depth">3</prop>
+				<prop key="hibernate.jdbc.fetch_size">18</prop>
+				<prop key="hibernate.jdbc.batch_size">10</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop><!--自动生成数据表 -->
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="javax.persistence.validation.mode">none</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 用于指定持久化实现厂商类 -->
+	<bean id="persistenceProvider" class="org.hibernate.ejb.HibernatePersistence"/>
+	
+	<!-- 用于设置JPA实现厂商的特定属性 -->
+	<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">  
+		<property name="database" value="MYSQL"/>  
+	</bean>
+	
+	<!-- 用于指定一些高级特性 -->
+	<bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
+	
+	<!-- JPA事务管理器 -->  
+	<bean id="txManager" 
+		class="org.springframework.orm.jpa.JpaTransactionManager">  
+		<property name="entityManagerFactory" ref="entityManagerFactory" />  
+	</bean>
+	
+	<!--使 Spring 识别出需要为其实现的持久层接口-->
+	<jpa:repositories base-package="com.z2w.*.dao" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="txManager"/>
+       
+	<!--启动spring事务注解功能-->    
+	<tx:annotation-driven transaction-manager="txManager"/>  
+  
+	<context:component-scan base-package="*" >
+    	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
 </beans>    
