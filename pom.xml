@@ -137,7 +137,14 @@
 
 	<build>
 		<finalName>Zero2Web</finalName>
-
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include><!-- 打包时包含properties文件 -->
+				</includes>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -163,7 +170,7 @@
 		</plugins>
 
 		<defaultGoal>compile</defaultGoal>
-	</build> 
+	</build>
 
 </project>
 
