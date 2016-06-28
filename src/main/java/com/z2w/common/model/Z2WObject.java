@@ -16,7 +16,7 @@ import javax.persistence.Version;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * 鎵�鏈夋ā鍨嬬殑瓒呯被
+ * 所有模型的超类
  */
 @MappedSuperclass
 public abstract class Z2WObject {
@@ -69,7 +69,7 @@ public abstract class Z2WObject {
 	}
 
 	/**
-	 * 杩斿洖oid(&ltClassName>:&ltid>, e.g. common.model.BaseObject:1)
+	 * 返回oid(&ltClassName>:&ltid>, e.g. common.model.BaseObject:1)
 	 */
 	public String toString() {
 		return this.getClass().getName() + ":" + id;

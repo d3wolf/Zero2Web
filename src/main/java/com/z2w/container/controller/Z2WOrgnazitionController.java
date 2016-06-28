@@ -74,6 +74,12 @@ public class Z2WOrgnazitionController {
 		return "container/organization/view";
 	}
 	
+	@RequestMapping("detail")
+	public String showOrgnazitionDetail(){
+		
+		return "container/organization/detail";
+	}
+	
 	@RequestMapping("getAll")
 	@ResponseBody//返回json
 	public List<Z2WOrganization> getAllOrgnazitions(HttpServletResponse response){

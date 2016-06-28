@@ -20,8 +20,8 @@
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
 		<property name="url" value="jdbc:mysql://localhost:3306/z2w?characterEncoding=UTF-8"/>
-		<property name="username" value="root"/>
-		<property name="password" value="x5"/>
+		<property name="username" value="z2w"/>
+		<property name="password" value="z2w"/>
 	</bean>
 	
 <!-- Hibernate session factory -->
@@ -53,7 +53,7 @@
 				<prop key="hibernate.jdbc.fetch_size">18</prop>
 				<prop key="hibernate.jdbc.batch_size">10</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop><!--自动生成数据表 -->
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="javax.persistence.validation.mode">none</prop>
 			</props>

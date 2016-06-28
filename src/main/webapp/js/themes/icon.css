@@ -106,3 +106,7 @@
 .icon-node{
 	background:url('icons/node.png') no-repeat center center;
 }
+
+.icon-arrow-down{
+	background:url('icons/arrow_down.png') no-repeat center center;
+}

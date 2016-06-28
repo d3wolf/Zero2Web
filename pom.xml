@@ -163,7 +163,7 @@
 		</plugins>
 
 		<defaultGoal>compile</defaultGoal>
-	</build>
+	</build> 
 
 </project>
 
