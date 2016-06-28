@@ -66,8 +66,18 @@ public interface Z2WActionService {
 	/**
 	 * 采用递归构造action tree的json字符串
 	 * @param actions
+	 * @param seq
 	 * @return
 	 * @throws Z2WException
 	 */
-	public JSONArray constructActionJson(List<Z2WActionBean> actions, Locale locale) throws Z2WException;
+	public JSONArray constructActionTreeJson(List<Z2WActionBean> actions, int seq, Locale locale) throws Z2WException;
+	
+	/**
+	 * 构造model-action menu 的json字符串
+	 * @param actions
+	 * @param seq action出现的顺序
+	 * @return
+	 * @throws Z2WException
+	 */
+	public JSONArray constructActionMenuJson(List<Z2WActionBean> actions, int seq, Locale locale) throws Z2WException;
 }

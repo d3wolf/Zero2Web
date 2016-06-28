@@ -103,10 +103,10 @@ public class Z2WOrgnazitionController {
 		JSONArray array = new JSONArray();
 		for(Z2WOrganization org : orgs){
 			JSONObject jo = new JSONObject();
-			jo.put("id", org.getId());
+			jo.put("id", org);
 			jo.put("text", org.getName());
 			jo.put("iconCls", "icon-organization");
-			jo.put("children", z2WActionService.constructActionJson(actions, locale));
+			jo.put("children", z2WActionService.constructActionTreeJson(actions, 0, locale));
 			
 			array.add(jo);
 		}

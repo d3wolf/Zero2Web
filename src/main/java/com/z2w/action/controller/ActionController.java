@@ -67,7 +67,7 @@ public class ActionController {
 	private Z2WActionService z2WActionService;
 
 	@RequestMapping(value = "modelActions")
-	public void getActionByModelName(HttpServletRequest request, HttpServletResponse response, @RequestParam("id") String name)
+	public void getActionTreeByModelName(HttpServletRequest request, HttpServletResponse response, @RequestParam("id") String name)
 			throws Z2WException, IOException {
 		List<Z2WActionBean> actions = z2WActionService.getModelActions(name);
 
@@ -75,7 +75,23 @@ public class ActionController {
 		RequestContext requestContext = new RequestContext(request);
 		Locale locale = requestContext .getLocale();
 		
-		JSONArray array = z2WActionService.constructActionJson(actions, locale);
+		JSONArray array = z2WActionService.constructActionTreeJson(actions, 0, locale);
+
+		response.setContentType("text/html;charset=UTF-8");
+
+		response.getWriter().write(array.toString());
+	}
+	
+	@RequestMapping(value = "modelActionsMenu")
+	public void getActionMenuByModelName(HttpServletRequest request, HttpServletResponse response, @RequestParam("id") String name)
+			throws Z2WException, IOException {
+		List<Z2WActionBean> actions = z2WActionService.getModelActions(name);
+
+		
+		RequestContext requestContext = new RequestContext(request);
+		Locale locale = requestContext .getLocale();
+		
+		JSONArray array = z2WActionService.constructActionMenuJson(actions, 0, locale);
 
 		response.setContentType("text/html;charset=UTF-8");
 

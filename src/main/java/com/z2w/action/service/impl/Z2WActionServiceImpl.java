@@ -8,6 +8,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -26,6 +27,8 @@ import net.sf.json.JSONObject;
 @Service
 public class Z2WActionServiceImpl implements Z2WActionService {
 
+	private static final Logger logger = Logger.getLogger(Z2WActionServiceImpl.class.getName());
+	
 	@Autowired
 	private Z2WActionDAO actionDao;
 
@@ -125,9 +128,9 @@ public class Z2WActionServiceImpl implements Z2WActionService {
 
 			message = rbService.getLocalizedMessage(rb, key, locale);
 		} catch (MissingResourceException e) {
-			System.out.println(String.format("can't find key %s in %s, use name instead", key, rb));
+			logger.debug(String.format("can't find key %s in %s, use name instead", key, rb));
 		} catch (Z2WException e) {
-			System.out.println(String.format("can't find model bean, use name instead", key));
+			logger.debug(String.format("can't find model bean, use name instead", key));
 		}
 
 		return message;
@@ -145,7 +148,7 @@ public class Z2WActionServiceImpl implements Z2WActionService {
 			try {
 				message = rbService.getLocalizedMessage(bean.getResource(), key, locale);
 			} catch (MissingResourceException e) {
-				System.out.println(String.format("can't find key %s in %s, use name instead", key, bean.getResource()));
+				logger.debug(String.format("can't find key %s in %s, use name instead", key, bean.getResource()));
 			}
 		}
 
@@ -153,18 +156,19 @@ public class Z2WActionServiceImpl implements Z2WActionService {
 	}
 	
 	/**
-	 * 采用递归构造action tree的json字符串
+	 * 构造model-action tree
 	 * @param actions
+	 * @param seq action出现的顺序
 	 * @return
 	 * @throws Z2WException
 	 */
-	public JSONArray constructActionJson(List<Z2WActionBean> actions, Locale locale) throws Z2WException{
+	public JSONArray constructActionTreeJson(List<Z2WActionBean> actions, int seq, Locale locale) throws Z2WException{
 		JSONArray array = new JSONArray();
 
 		for (Z2WActionBean action : actions) {
 			if (!action.isModel()) {
 				JSONObject jo = new JSONObject();
-				jo.put("id", action.getName());
+				jo.put("id", action.getName() + "_" + seq);
 				jo.put("text", getLocalizedActionName(action,"title", locale));
 				jo.put("url", action.getUrl());
 				jo.put("type", action.getType());
@@ -173,14 +177,14 @@ public class Z2WActionServiceImpl implements Z2WActionService {
 				array.add(jo);
 			}else{
 				JSONObject jo = new JSONObject();
-				jo.put("id", action.getName());
+				jo.put("id", action.getName() + "_" + seq);
 				jo.put("text", getLocalizedActionModelName(action.getName(),"title", locale));
-				jo.put("state", "closed");//model默认折叠
+				jo.put("state", "closed");//model默认关闭
 				jo.put("iconCls", "icon-node");
 
 				List<Z2WActionBean> subActions = getModelActions(action.getName());
 				
-				jo.put("children", constructActionJson(subActions, locale));
+				jo.put("children", constructActionTreeJson(subActions, seq, locale));
 				
 				array.add(jo);
 			}
@@ -189,4 +193,42 @@ public class Z2WActionServiceImpl implements Z2WActionService {
 		return array;
 	}
 	
+	
+	/**
+	 * 构造model-action menu 
+	 * @param actions
+	 * @param seq action出现的顺序
+	 * @return
+	 * @throws Z2WException
+	 */
+	public JSONArray constructActionMenuJson(List<Z2WActionBean> actions, int seq, Locale locale) throws Z2WException{
+		JSONArray array = new JSONArray();
+
+		for (Z2WActionBean action : actions) {
+			if (!action.isModel()) {
+				JSONObject jo = new JSONObject();
+				jo.put("id", action.getName() + "_" + seq);
+				jo.put("text", getLocalizedActionName(action,"title", locale));
+				jo.put("url", action.getUrl());
+				jo.put("type", action.getType());
+				jo.put("iconCls", getLocalizedActionName(action,"iconCls", locale));
+
+				array.add(jo);
+			}else{
+				JSONObject jo = new JSONObject();
+				jo.put("id", action.getName() + "_" + seq);
+				jo.put("text", getLocalizedActionModelName(action.getName(),"title", locale));
+				jo.put("state", "closed");//model默认关闭
+				jo.put("iconCls", getLocalizedActionName(action,"iconCls", locale));
+
+				List<Z2WActionBean> subActions = getModelActions(action.getName());
+				
+				jo.put("children", constructActionMenuJson(subActions, seq, locale));
+				
+				array.add(jo);
+			}
+		}
+		
+		return array;
+	}
 }

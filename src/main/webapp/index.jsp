@@ -43,7 +43,7 @@
 
 			onClick : function(node) {
 				if(node.url){
-					window.location.href=basePath  + '/#z2w/' + node.url;
+					window.location.href=basePath  + '/#z2w/' + node.url + "?orgnizationOid=" + node.id;
 				//	$('#maincontent').panel('setTitle',"${menu1Title}>>"+node.text);
 				}
 			}
