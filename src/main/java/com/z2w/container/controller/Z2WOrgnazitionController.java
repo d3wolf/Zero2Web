@@ -1,8 +1,10 @@
 package com.z2w.container.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -102,11 +104,14 @@ public class Z2WOrgnazitionController {
 		
 		JSONArray array = new JSONArray();
 		for(Z2WOrganization org : orgs){
+			Map<String, Object> extParams = new HashMap<String, Object>();
+			extParams.put("contextOid", org.toString());
+			
 			JSONObject jo = new JSONObject();
 			jo.put("id", org);
 			jo.put("text", org.getName());
 			jo.put("iconCls", "icon-organization");
-			jo.put("children", z2WActionService.constructActionTreeJson(actions, 0, locale));
+			jo.put("children", z2WActionService.constructActionTreeJson(actions, 0, extParams, locale));
 			
 			array.add(jo);
 		}

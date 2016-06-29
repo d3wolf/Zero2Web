@@ -5,6 +5,7 @@
 	<model name="show_navigator_actions" resourceBundle="com.z2w.common.resource.NavigatorRB">
 		<action name="show" type="navigator"/>
 		<action name="test" type="navigator"/>
+		<action name="separator" type="separator"/>
 		<submodel name="submenu"/>
 		<submodel name="submenu2"/>
 	</model>

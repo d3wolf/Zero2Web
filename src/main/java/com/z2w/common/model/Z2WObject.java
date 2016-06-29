@@ -16,7 +16,7 @@ import javax.persistence.Version;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * ËùÓÐÄ£ÐÍµÄ³¬Àà
+ * æ‰€æœ‰æ¨¡åž‹è¶…ç±»
  */
 @MappedSuperclass
 public abstract class Z2WObject {
@@ -69,7 +69,7 @@ public abstract class Z2WObject {
 	}
 
 	/**
-	 * ·µ»Øoid(&ltClassName>:&ltid>, e.g. common.model.BaseObject:1)
+	 * è½¬æ¢ä¸ºoid(&ltClassName>:&ltid>, e.g. com.z2w.common.model.Z2WObject:1)
 	 */
 	public String toString() {
 		return this.getClass().getName() + ":" + id;

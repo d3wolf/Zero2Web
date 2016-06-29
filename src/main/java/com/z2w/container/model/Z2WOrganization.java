@@ -25,4 +25,8 @@ public class Z2WOrganization extends Z2WObject implements Z2WContainer {
 	public Class<?> getType() {
 		return this.getClass();
 	}
+
+	public String getDisplayIdentity() {
+		return name;
+	}
 }

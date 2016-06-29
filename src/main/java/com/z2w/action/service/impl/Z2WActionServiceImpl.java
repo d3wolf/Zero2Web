@@ -162,18 +162,22 @@ public class Z2WActionServiceImpl implements Z2WActionService {
 	 * @return
 	 * @throws Z2WException
 	 */
-	public JSONArray constructActionTreeJson(List<Z2WActionBean> actions, int seq, Locale locale) throws Z2WException{
+	public JSONArray constructActionTreeJson(List<Z2WActionBean> actions, int seq, Map<String, Object> extParams, Locale locale) throws Z2WException{
 		JSONArray array = new JSONArray();
 
 		for (Z2WActionBean action : actions) {
 			if (!action.isModel()) {
+				if("separator".equals(action.getName())){//树形菜单跳过分隔符
+					continue;
+				}
 				JSONObject jo = new JSONObject();
 				jo.put("id", action.getName() + "_" + seq);
 				jo.put("text", getLocalizedActionName(action,"title", locale));
 				jo.put("url", action.getUrl());
 				jo.put("type", action.getType());
 				jo.put("iconCls", "icon-node");
-
+				jo.putAll(extParams);
+				
 				array.add(jo);
 			}else{
 				JSONObject jo = new JSONObject();
@@ -181,10 +185,11 @@ public class Z2WActionServiceImpl implements Z2WActionService {
 				jo.put("text", getLocalizedActionModelName(action.getName(),"title", locale));
 				jo.put("state", "closed");//model默认关闭
 				jo.put("iconCls", "icon-node");
-
+				jo.putAll(extParams);
+				
 				List<Z2WActionBean> subActions = getModelActions(action.getName());
 				
-				jo.put("children", constructActionTreeJson(subActions, seq, locale));
+				jo.put("children", constructActionTreeJson(subActions, seq, extParams, locale));
 				
 				array.add(jo);
 			}
@@ -201,7 +206,7 @@ public class Z2WActionServiceImpl implements Z2WActionService {
 	 * @return
 	 * @throws Z2WException
 	 */
-	public JSONArray constructActionMenuJson(List<Z2WActionBean> actions, int seq, Locale locale) throws Z2WException{
+	public JSONArray constructActionMenuJson(List<Z2WActionBean> actions, int seq, Map<String, Object> extParams, Locale locale) throws Z2WException{
 		JSONArray array = new JSONArray();
 
 		for (Z2WActionBean action : actions) {
@@ -212,7 +217,8 @@ public class Z2WActionServiceImpl implements Z2WActionService {
 				jo.put("url", action.getUrl());
 				jo.put("type", action.getType());
 				jo.put("iconCls", getLocalizedActionName(action,"iconCls", locale));
-
+				jo.putAll(extParams);
+				
 				array.add(jo);
 			}else{
 				JSONObject jo = new JSONObject();
@@ -220,10 +226,11 @@ public class Z2WActionServiceImpl implements Z2WActionService {
 				jo.put("text", getLocalizedActionModelName(action.getName(),"title", locale));
 				jo.put("state", "closed");//model默认关闭
 				jo.put("iconCls", getLocalizedActionName(action,"iconCls", locale));
-
+				jo.putAll(extParams);
+				
 				List<Z2WActionBean> subActions = getModelActions(action.getName());
 				
-				jo.put("children", constructActionMenuJson(subActions, seq, locale));
+				jo.put("children", constructActionMenuJson(subActions, seq, extParams, locale));
 				
 				array.add(jo);
 			}

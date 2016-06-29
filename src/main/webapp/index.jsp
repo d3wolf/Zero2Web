@@ -43,7 +43,11 @@
 
 			onClick : function(node) {
 				if(node.url){
-					window.location.href=basePath  + '/#z2w/' + node.url + "?orgnizationOid=" + node.id;
+					if(node.url=='tcomp/infoPage'){
+						window.location.href=basePath  + '/#z2w/' + node.url + "?oid=" + node.contextOid;
+					}else{
+						window.location.href=basePath  + '/#z2w/' + node.url + "?orgnizationOid=" + node.contextOid;
+					}
 				//	$('#maincontent').panel('setTitle',"${menu1Title}>>"+node.text);
 				}
 			}

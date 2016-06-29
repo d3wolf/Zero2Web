@@ -1,8 +1,10 @@
 package com.z2w.action.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -75,7 +77,9 @@ public class ActionController {
 		RequestContext requestContext = new RequestContext(request);
 		Locale locale = requestContext .getLocale();
 		
-		JSONArray array = z2WActionService.constructActionTreeJson(actions, 0, locale);
+		Map<String, Object> extParams = new HashMap<String, Object>();
+		
+		JSONArray array = z2WActionService.constructActionTreeJson(actions, 0, extParams, locale);
 
 		response.setContentType("text/html;charset=UTF-8");
 
@@ -91,7 +95,8 @@ public class ActionController {
 		RequestContext requestContext = new RequestContext(request);
 		Locale locale = requestContext .getLocale();
 		
-		JSONArray array = z2WActionService.constructActionMenuJson(actions, 0, locale);
+		Map<String, Object> extParams = new HashMap<String, Object>();
+		JSONArray array = z2WActionService.constructActionMenuJson(actions, 0, extParams, locale);
 
 		response.setContentType("text/html;charset=UTF-8");
 

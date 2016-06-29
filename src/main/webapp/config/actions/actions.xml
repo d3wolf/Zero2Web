@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<listofactions>
+
+	<objecttype name="separator">
+		<action name="separator" >
+		</action>
+	</objecttype>
+	
+</listofactions>

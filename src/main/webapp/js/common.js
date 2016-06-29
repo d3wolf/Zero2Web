@@ -40,22 +40,23 @@ function loadMenuFromServer(options){
 			var ja = jQuery.parseJSON(result);
 			
 	        $.each(ja, function (n, value) {//遍历json数组
-	        	$('#'+options.menuId).menu('appendItem', {
-	        		id : value.id,
-					text: value.text,
-					iconCls: value.iconCls ? value.iconCls : 'icon-blank',
-					name:value.url
-				});
-				
-
-		        if(value.children){
+	        	
+	        	if(value.text=='separator'){//处理分割线
 					$('#'+options.menuId).menu('appendItem', {
 		        		separator:true
 					});
+	        	}else{
+		        	$('#'+options.menuId).menu('appendItem', {
+		        		id : value.id,
+						text: value.text,
+						iconCls: value.iconCls ? value.iconCls : 'icon-blank',
+						name:value.url
+					});
+	        	}
+				
+		        if(value.children){//如果有子菜单，递归生成子菜单
 		        	createChildrenMenu(options.menuId, value.id, value.children);
-		        }
-		        console.log($('#'+value.id)[0]);
-		        
+		        }   
 	        }); 
 		}
 	});
@@ -69,7 +70,6 @@ function loadMenuFromServer(options){
 function createChildrenMenu(menuId, parentId, childrenJson){
 	$.each(childrenJson, function(index, json) {
 		var itemEl = $('#'+parentId)[0];  // 获取菜单项
-	//	console.log(itemEl);
 		var item = $('#mm').menu('getItem', itemEl);
   		$('#'+menuId).menu('appendItem', {
   			parent: item.target,
