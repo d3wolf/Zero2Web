@@ -116,9 +116,12 @@
 </head>
 <body class="easyui-layout">
 	<div data-options="region:'north',border:false" style="height: 60px">
-		<div style="cursor: pointer" onclick="gohome()">
+		<div style="cursor: pointer;float:left" onclick="gohome()">
 			<h1>Zero To Web</h1>
 		</div>
+	 	<div style="float:right;padding-top:20px">
+			<input id="ss" class="easyui-searchbox" data-options="prompt:'Test searcher'"></input> 
+		</div> 
 	</div>
 	<div data-options="region:'west',title:'${navigatorTitle}',split:true" id="navigation-panel" class="easyui-accordion" style="width: 200px">
 		<div id="organization" title="${menu3Title}" data-options="iconCls:'icon-organization'">
