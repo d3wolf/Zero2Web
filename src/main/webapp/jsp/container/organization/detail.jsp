@@ -6,10 +6,10 @@
 
 <script type="text/javascript">
 	$(function() {
-		$('#mm').menu('show', {    
-			  left: 200,    
-			  top: 100    
-			}); 
+		$('#pg').propertygrid({    
+		    url: '${pageContext.request.contextPath}/z2w/organization/getInfoJsonByOid?oid=${param.oid}',    
+		    scrollbarSize: 0    
+		}); 
 	});
 	
 </script>
@@ -17,19 +17,7 @@
 
 
 <body class="easyui-layout">
-<div id="mm" class="easyui-menu" style="width:120px;">   
-    <div>New</div>   
-    <div>   
-        <span>Open</span>   
-        <div style="width:150px;">   
-            <div><b>Word</b></div>   
-            <div>Excel</div>   
-            <div>PowerPoint</div>   
-        </div>   
-    </div>   
-    <div data-options="iconCls:'icon-save'">Save</div>   
-    <div class="menu-sep"></div>   
-    <div>Exit</div>   
-</div> 
+<table id="pg" style="width:300px"></table>  
+
 	 
 </body>
