@@ -36,34 +36,22 @@
 		}); 
 		
 
-		$('#tt').tabs({    
-		    border:false, 
-		    selected:0,
-		    onSelect:function(title){ 
-		    	var pp = $('#tt').tabs('getSelected');    
-		    	var tab = pp.panel('options').height;
-		        console.log(tab);    
-		    }    
-		}); 
-			
-		// 增加一个新的 tab panel
-		$('#tt').tabs('add',{
-			title:'New Tab',
-			content:'Tab Body',
-			
-		}); 
-		// 增加一个新的 tab panel
-		$('#tt').tabs('add',{
-			title:'New Tab2',
-			content:'Tab Body'
-		}); 
-		
-		$('#tt').tabs({    
-
-		    selected:0
-   
-		}); 
-		
+	 	$.ajax({//后台读取标签页信息
+			cache: false,//是否缓存
+			url : "${pageContext.request.contextPath}/z2w/action/modelActions?id=organization_infoPage_tabs",
+			success : function(result) {
+				 var ja = jQuery.parseJSON(result);
+				 $.each(ja, function (n, value) {//遍历json数组
+					$('#tt').tabs('add',{
+						title:value.text,
+						content:value.url,
+					}); 
+				  });
+			}
+		});
+				$('#tt').tabs({   
+				    selected:0
+				}); 
 	});
 
 </script>

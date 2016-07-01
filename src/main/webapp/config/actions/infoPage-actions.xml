@@ -2,6 +2,14 @@
 
 <listofactions>
 
- 
+	<objecttype name="organization">
+		<action name="detailTab" >
+			<command url="action/demo/test1"/>
+		</action>
+		
+		<action name="contentTab">
+			<command url="action/demo/test2"/>
+		</action>
+	</objecttype>
 	
 </listofactions>
