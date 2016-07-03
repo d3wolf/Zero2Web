@@ -27,4 +27,5 @@ public class Z2WTypeBasedComponentController {
 		
 		return persistenceService.getObjectByOid(oid);
 	}
+	
 }

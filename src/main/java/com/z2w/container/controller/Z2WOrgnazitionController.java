@@ -136,10 +136,15 @@ public class Z2WOrgnazitionController {
 		
 		JSONObject jo2 = new JSONObject();
 		jo2.put("name", "创建日期");
-		jo2.put("value", org.getCreateTimestamp());
+		jo2.put("value", org.getCreateTimestamp().toString());
+		
+		JSONObject jo3 = new JSONObject();
+		jo3.put("name", "修改日期");
+		jo3.put("value", org.getModefyTimestamp().toString());
 		
 		array.add(jo1);
 		array.add(jo2);
+		array.add(jo3);
 		
 		
 		JSONObject jo = new JSONObject();

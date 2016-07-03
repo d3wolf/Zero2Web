@@ -60,6 +60,15 @@ function loadMenuFromServer(options){
 	        }); 
 		}
 	});
+	
+	//处理菜单点击事件
+ 	$('#'+options.menuId).menu({
+	    onClick:function(item){  
+	    	if(item.name){
+	    		$.messager.alert('警告',item.name);    
+	    	}
+	    }  
+	}); 
 }
 /**
  * 使用递归构造menu菜单
@@ -83,3 +92,37 @@ function createChildrenMenu(menuId, parentId, childrenJson){
 		}
   	}); 
 }
+
+/**
+ * 根据oid获取类型名称
+ * @param {} objectOid
+ * @return {}
+ */
+function getObjectNameByOid(objectOid){
+	var objectClass = objectOid.split(":")[0];
+	var objectClassNames = objectClass.split(".");
+	var objectClassName = objectClassNames[objectClassNames.length-1];
+
+	return objectClassName;
+}
+
+
+/*function loadDetailTT(){
+	var objectClassName = getObjectNameByOid('${param.oid}');
+	$('#tt').tabs({}); 
+ 	$.ajax({//后台读取标签页信息
+		cache: false,//是否缓存
+		url : "${pageContext.request.contextPath}/z2w/action/modelActions?id="+objectClassName+"_infoPage_tabs",
+		success : function(result) {
+			 var ja = jQuery.parseJSON(result);
+			 $.each(ja, function (n, value){//遍历json数组
+				var selected = n==0?true:false;//设置第一个tab被选中
+				$('#tt').tabs('add',{
+					title:value.text,
+					href:"${pageContext.request.contextPath}/z2w/"+value.url+"?oid=${param.oid}",
+					selected:selected
+				}); 
+			  });
+		}
+	});
+}*/

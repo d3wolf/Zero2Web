@@ -1,8 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<head>
-<title>View organization</title>
 
-<%@include file="/jsp/common.jsp" %> 
+
+<!-- 
+
+如果你应该用了easyui中加载外部界面的组件，例如：panel,window，dailog,tabs等。
+请确保你引入的界面是一个html片段。
+html片段正确的写法再次提醒不要出现<html><head><body>三个标签：
+	<script type="text/javascript" src="test.js"></script>
+	<link ref="css"/>
+	<style>还可以写点样式</style>
+	<script>alert("我是外部加载的html片段");</script>
+	<div><p>我是外部加载的html片段</p></div>
+ -->
 
 <script type="text/javascript">
 	$(function() {
@@ -13,11 +21,8 @@
 	});
 	
 </script>
-</head>
+<div style="width:100%;height: 100%">
+	<table id="pg" style="width:400px"></table>
+</div>  
 
 
-<body class="easyui-layout">
-<table id="pg" style="width:300px"></table>  
-
-	 
-</body>

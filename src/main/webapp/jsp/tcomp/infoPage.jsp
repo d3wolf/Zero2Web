@@ -6,6 +6,8 @@
 
 <script type="text/javascript">
 	$(function() {
+		var objectClassName = getObjectNameByOid('${param.oid}');
+		console.log(objectClassName);
 		
 		$.ajax({//获取标识栏位信息
 			cache: false,//是否缓存
@@ -18,7 +20,7 @@
 		
 		//加载action菜单
 		loadMenuFromServer({
-			actionJsonUrl : "${pageContext.request.contextPath}/z2w/action/modelActionsMenu?id=show_navigator_actions",
+			actionJsonUrl : "${pageContext.request.contextPath}/z2w/action/modelActionsMenu?id="+objectClassName+"_infoPage_actions",
 			menuId : 'mm',
 			cache : true
 		});
@@ -26,32 +28,25 @@
 		$('#mb').linkbutton('resize', {
 			height : '20',
 		});
-
-	 	$('#mm').menu({ 
-		    onClick:function(item){  
-		    	if(item.name){
-		    		$.messager.alert('警告',item.name);    
-		    	}
-		    }  
-		}); 
 		
-
+	 	//创建详细信息标签页
+		$('#tt').tabs({}); 
 	 	$.ajax({//后台读取标签页信息
 			cache: false,//是否缓存
-			url : "${pageContext.request.contextPath}/z2w/action/modelActions?id=organization_infoPage_tabs",
+			url : "${pageContext.request.contextPath}/z2w/action/modelActions?id="+objectClassName+"_infoPage_tabs",
 			success : function(result) {
 				 var ja = jQuery.parseJSON(result);
-				 $.each(ja, function (n, value) {//遍历json数组
+				 $.each(ja, function (n, value){//遍历json数组
+					var selected = n==0?true:false;//设置第一个tab被选中
 					$('#tt').tabs('add',{
 						title:value.text,
-						href:"${pageContext.request.contextPath}/z2w/"+value.url,
+						href:"${pageContext.request.contextPath}/z2w/"+value.url+"?oid=${param.oid}",
+						selected:selected
 					}); 
 				  });
 			}
 		});
-				$('#tt').tabs({   
-				    selected:0
-				}); 
+	 	
 	});
 
 </script>
@@ -64,7 +59,6 @@
 		<div id="mm" style="width: 150px;"></div>
 		<div id="displayIdentifier" style="float: left;padding-top:5px;padding-left:5px"></div>
 	</div>
-
 
 	<div data-options="region:'center',border:false">
 		<div id="tt"></div>
