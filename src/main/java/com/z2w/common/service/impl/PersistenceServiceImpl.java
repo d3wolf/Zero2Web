@@ -1,6 +1,5 @@
 package com.z2w.common.service.impl;
 
-import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
