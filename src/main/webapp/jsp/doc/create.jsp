@@ -20,6 +20,7 @@
 		    },    
 		    success:function(data){  
 		    	window.opener.refresh();
+		    	window.close();
 		    }
 		});
 	}

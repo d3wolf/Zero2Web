@@ -19,7 +19,7 @@
 		                { text: '增加', iconCls: 'icon-add', handler: function () {
 		                	window.open('${pageContext.request.contextPath}/z2w/doc/create?containerOid=${param.orgnizationOid}');
 		                } },
-		                { text: '修改', iconCls: 'icon-edit', handler: function () { deviceInfoEditClick(); } }],
+		                { text: '修改', iconCls: 'icon-edit', handler: function () {  } }],
 		}); 
 	});
 	
