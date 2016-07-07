@@ -61,14 +61,6 @@ function loadMenuFromServer(options){
 		}
 	});
 	
-	//处理菜单点击事件
- 	$('#'+options.menuId).menu({
-	    onClick:function(item){  
-	    	if(item.name){
-	    		$.messager.alert('警告',item.name);    
-	    	}
-	    }  
-	}); 
 }
 /**
  * 使用递归构造menu菜单

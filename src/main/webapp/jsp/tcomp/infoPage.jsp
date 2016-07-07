@@ -24,6 +24,15 @@
 			menuId : 'mm',
 			cache : true
 		});
+		
+		//处理菜单点击事件
+	 	$('#mm').menu({
+		    onClick:function(item){  
+		    	if(item.name){
+		    		window.open('${pageContext.request.contextPath}/z2w/'+item.name+'?oid=${param.oid}');
+		    	}
+		    }  
+		}); 
 
 		$('#mb').linkbutton('resize', {
 			height : '20',
