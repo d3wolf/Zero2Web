@@ -124,9 +124,7 @@ public class ActionController {
 	
 	@RequestMapping(value = "/testGridAction")
 	public void testGetGridAction(HttpServletResponse response) throws IOException{
-		String result = "[{ text: '增加', iconCls: 'icon-add', handler: function () {"+
-		                	"window.open('${pageContext.request.contextPath}/z2w/doc/create?containerOid=${param.orgnizationOid}');"+
-		                "} },"+
+		String result = "[{ text: '增加', iconCls: 'icon-add', url:'/doc/create'},"+
 		                "{ text: '修改', iconCls: 'icon-edit', handler: function () {  } }]";
 		
 		response.setContentType("text/html;charset=UTF-8");
