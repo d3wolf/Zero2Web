@@ -28,7 +28,7 @@ public class WXMainController {
 	@Autowired
 	private MessageService msgService;
 
-	@RequestMapping(value = { "/wechat.do" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/wechat" }, method = RequestMethod.GET)
 	public void coreJoinGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
 			// 微信加密签名
@@ -61,7 +61,7 @@ public class WXMainController {
 	}
 
 
-	@RequestMapping(value = { "/wechat.do" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/wechat" }, method = RequestMethod.POST)
 	public void coreJoinPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
