@@ -20,8 +20,8 @@
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
 		<property name="url" value="jdbc:mysql://localhost:3306/z2w?characterEncoding=UTF-8"/>
-		<property name="username" value="root"/>
-		<property name="password" value="x5"/>
+		<property name="username" value="z2w"/>
+		<property name="password" value="z2w"/>
 	</bean>
 	
 <!-- Hibernate session factory -->
