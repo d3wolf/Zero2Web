@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import org.springframework.stereotype.Service;
 
-import wechat.service.SignService;
+import com.z2w.wechat.service.SignService;
 
 /**
  * 签名验证工具类

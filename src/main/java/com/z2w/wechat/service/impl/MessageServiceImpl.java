@@ -13,7 +13,7 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.springframework.stereotype.Service;
 
-import wechat.service.MessageService;
+import com.z2w.wechat.service.MessageService;
 
 @Service
 public class MessageServiceImpl implements MessageService {

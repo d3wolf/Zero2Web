@@ -1,6 +1,6 @@
 package com.z2w.wechat.service;
 
-import wechat.model.WXUser;
+import com.z2w.wechat.model.WXUser;
 
 public interface WXCommonService {
 

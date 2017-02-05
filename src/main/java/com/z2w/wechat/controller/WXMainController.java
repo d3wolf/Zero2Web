@@ -14,8 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import wechat.service.MessageService;
-import wechat.service.SignService;
+import com.z2w.wechat.service.MessageService;
+import com.z2w.wechat.service.SignService;
 
 @Controller
 public class WXMainController {

@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import wechat.dao.WXUserDao;
-import wechat.model.WXUser;
-import wechat.service.WXCommonService;
+import com.z2w.wechat.dao.WXUserDao;
+import com.z2w.wechat.model.WXUser;
+import com.z2w.wechat.service.WXCommonService;
 
 @Service
 @Transactional(readOnly = false,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)

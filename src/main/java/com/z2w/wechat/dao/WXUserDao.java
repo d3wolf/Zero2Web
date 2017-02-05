@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import wechat.model.WXUser;
+import com.z2w.wechat.model.WXUser;
 
 public interface WXUserDao  extends CrudRepository<WXUser, Integer>{
 
